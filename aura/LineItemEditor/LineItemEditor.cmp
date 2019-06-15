@@ -1,0 +1,32 @@
+<aura:component>
+    <ltng:require styles="{!$Resource.QuickActionCSS}" />
+    <aura:attribute name="step" type="integer" default="1"/>
+    <aura:attribute name="products" type="list" default="[]"/>
+    
+    <aura:attribute name="parentId" type="string"/>
+    <aura:attribute name="pricebookAPI" type="string"/>
+    <aura:attribute name="objectAPI" type="string"/>
+    <aura:attribute name="parentAPI" type="string"/>
+    <aura:attribute name="productAPI" type="string"/>
+    <aura:attribute name="salesPriceAPI" type="string"/>
+    <aura:attribute name="quantityAPI" type="string"/>
+    <aura:attribute name="discountAPI" type="string"/>
+    
+    <aura:handler name="stepEmitter" event="c:StepEmitter" action="{!c.handleComponentEvent}"/>
+    
+    <aura:if isTrue="{!v.step == 1}">
+        <c:ProductSelection pricebookAPIName="{!v.pricebookAPI}" 
+	                            parentId = "{!v.parentId}"></c:ProductSelection>
+        <aura:set attribute="else">
+            <c:ProductEditor parentId = "{!v.parentId}"
+                             prods="{!v.products}" 
+                             objectAPI="{!v.objectAPI}" 
+                             parentAPI="{!v.parentAPI}" 
+                             productAPI="{!v.productAPI}" 
+                             salesPriceAPI="{!v.salesPriceAPI}" 
+                             quantityAPI="{!v.quantityAPI}" 
+                             discountAPI="{!v.discountAPI}">
+            </c:ProductEditor>
+        </aura:set>
+    </aura:if> 
+</aura:component>

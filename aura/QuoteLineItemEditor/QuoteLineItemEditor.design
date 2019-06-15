@@ -1,0 +1,8 @@
+<design:component>
+    <design:attribute name="objectAPI" label="Line Item Object API Name" description="Enter line item object API name" required="true"/>
+    <design:attribute name="parentAPI" label="Parent Field API" description="Enter Parent Field API Name"  required="true"/>
+    <design:attribute name="productAPI" label="Product Field API" description="Enter Product Field API Name" required="true"/>
+    <design:attribute name="salesPriceAPI" label="Sales Price Field API" description="Enter Sales Price field API name"  required="true"/>
+	<design:attribute name="quantityAPI" label="Quantity Field API" description="Enter Quantity Field API Name"  required="true"/>
+    <design:attribute name="discountAPI" label="Discount Field API" description="Enter Discount Field API Name" required="true"/>
+</design:component>

@@ -1,0 +1,90 @@
+<aura:component controller="LineItemEditiorController">
+    
+    <!-- attributes -->
+    <aura:attribute name="prods" type="list" default="[]"/>
+    <aura:attribute name="lineItems" type="list" default="[]"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <aura:attribute name="parentId" type="string"/>
+    <aura:attribute name="objectAPI" type="string"/>
+    <aura:attribute name="productAPI" type="string"/>
+    <aura:attribute name="salesPriceAPI" type="string"/>
+    <aura:attribute name="quantityAPI" type="string"/>
+    <aura:attribute name="discountAPI" type="string"/>
+    <aura:attribute name="parentAPI" type="string"/>
+    
+    
+    <lightning:overlayLibrary aura:id="overlayLibDemo1"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    
+    <aura:attribute name="initialised" type="boolean" default="false"/>
+    
+    <!-- aura:handler name="init" value="{!this}" action="{!c.doInit}"/ -->
+    <aura:handler name="render" value="{!this}" action="{!c.productInitializer}"/>
+    
+    <!-- events -->
+    <aura:registerEvent name="stepEmitter" type="c:StepEmitter"/>
+    <aura:registerEvent name="closeOverlay" type="c:CloseOverlay"/>
+    
+    <aura:attribute name="EditorTitle" type="Aura.Component[]">
+        <div class="slds-text-heading_large">Manage Selected Products</div>
+    </aura:attribute>
+    <div class="body">
+        <lightning:card>
+            <aura:set attribute="title">
+                {!v.EditorTitle}
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:buttonGroup>
+                    <lightning:button label="Back" onclick="{!c.back}"/>
+                    <lightning:button label="Save" onclick="{!c.save}"/>
+                    <lightning:button label="Close" onclick="{!c.close}" />
+                </lightning:buttonGroup>
+            </aura:set>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Product Name">Product Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Sales Price">Sales Price</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Quantity">Quantity</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Discount">Discount</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.lineItems}" var="lineItem">   
+                        <tr class="slds-hint-parent">
+                            <td data-label="Product Name">
+                                <div class="slds-truncate" title="{!lineItem.productName}">{!lineItem.productName}</div>
+                            </td>
+                            <td data-label="sales Price">
+                                <div class="slds-truncate" title="{!lineItem.unitPrice}">
+                                    <ui:inputCurrency value="{!lineItem.unitPrice}" updateOn="keyup"/>
+                                </div>
+                            </td>
+                            <td data-label="Quantity">
+                                <div class="slds-truncate" title="{!lineItem.quantity}">
+                                    <ui:inputNumber value="{!lineItem.quantity}" updateOn="keyup"/>
+                                </div>
+                            </td>
+                            <td data-label="Discount">
+                                <div class="slds-truncate" title="{!lineItem.discount}">
+                                    <ui:inputNumber value="{!lineItem.discount}" updateOn="keyup"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+                
+            </table>
+            
+        </lightning:card>
+    </div>
+</aura:component>

@@ -1,0 +1,15 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="objectAPI" type="string"/>
+    <aura:attribute name="parentAPI" type="string"/>
+    <aura:attribute name="productAPI" type="string"/>
+    <aura:attribute name="salesPriceAPI" type="string"/>
+    <aura:attribute name="quantityAPI" type="string"/>
+    <aura:attribute name="discountAPI" type="string"/>
+    <aura:attribute name="pricebookAPI" type="string"/>
+    
+        
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <div class="body">
+    	<lightning:button label="Manage Products" onclick="{!c.handleShowModal}"/>
+    </div>
+</aura:component>

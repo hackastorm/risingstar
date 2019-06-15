@@ -1,0 +1,50 @@
+<aura:component controller="LineItemEditiorController">
+    <!-- attributes -->
+    <aura:attribute name="parentId" type="Id"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="pricebookAPIName" type="string"/>
+    <aura:attribute name="ProductList" type="List" default="[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="TableTitle" type="Aura.Component[]">
+        <div class="slds-text-heading_large">Select Products</div>
+    </aura:attribute>
+    
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    
+    <lightning:overlayLibrary aura:id="overlayLibDemo1"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.parentId}"
+                      targetFields="{!v.simpleRecord}"
+                      targetError="{!v.recordError}"
+                      recordUpdated="{!c.handleRecordUpdated}"
+                      layoutType="FULL"
+                      />
+    
+    <!-- events -->
+    <aura:registerEvent name="stepEmitter" type="c:StepEmitter"/>
+    
+    <!-- the container element determine the height of the datatable -->
+    <div class="body">
+        <lightning:card>
+            <aura:set attribute="title">
+                {!v.TableTitle}
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:buttonGroup>
+                    <lightning:button label="Next" onclick="{!c.next}"/>
+                    <lightning:button label="Close" onclick="{!c.close}"/>
+                </lightning:buttonGroup>
+            </aura:set>
+            <lightning:datatable
+                                 columns="{! v.columns }"
+                                 data="{! v.ProductList }"
+                                 keyField="productId"
+                                 class="productTable"
+                                 aura:id="productTable"/>
+        </lightning:card>
+    </div>
+</aura:component>

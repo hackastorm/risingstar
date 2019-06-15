@@ -1,0 +1,28 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader" >
+    <ltng:require styles="{!$Resource.QuickActionCSS}" />
+    <aura:attribute name="step" type="integer" default="1"/>
+    <aura:attribute name="products" type="list" default="[]"/>
+    
+    <aura:attribute name="objectAPI" type="string" default="QuoteLineItem"/>
+    <aura:attribute name="parentAPI" type="string" default="QuoteLineItem"/>
+    <aura:attribute name="productAPI" type="string" default="Product2Id"/>
+    <aura:attribute name="salesPriceAPI" type="string" default="UnitPrice"/>
+    <aura:attribute name="quantityAPI" type="string" default="Quantity"/>
+    <aura:attribute name="discountAPI" type="string" default="Quantity"/>
+    
+    <aura:handler name="stepEmitter" event="c:StepEmitter" action="{!c.handleComponentEvent}"/>
+    
+    <aura:if isTrue="{!v.step == 1}">
+        <c:ProductSelection></c:ProductSelection>
+        <aura:set attribute="else">
+            <c:ProductEditor prods="{!v.products}" 
+                             objectAPI="{!v.objectAPI}" 
+                             parentAPI="{!v.parentAPI}" 
+                             productAPI="{!v.productAPI}" 
+                             salesPriceAPI="{!v.salesPriceAPI}" 
+                             quantityAPI="{!v.quantityAPI}" 
+                             discountAPI="{!v.discountAPI}">
+            </c:ProductEditor>
+        </aura:set>
+    </aura:if> 
+</aura:component>

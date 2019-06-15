@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="step" type="integer"/>
+    <aura:attribute name="data" type="List"/>
+</aura:event>
